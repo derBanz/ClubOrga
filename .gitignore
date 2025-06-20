@@ -1,0 +1,75 @@
+#Maven
+target/
+target-jacoco/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# IntelliJ
+.idea
+*.ipr
+*.iml
+*.iws
+
+# NetBeans
+nb-configuration.xml
+
+# Visual Studio Code
+.vscode
+.factorypath
+
+# OSX
+.DS_Store
+
+# Vim
+*.swp
+*.swo
+
+# patch
+*.orig
+*.rej
+
+# Local environment
+.env
+
+#Angular
+# compiled output
+dist
+tmp
+out-tsc
+# angular internals
+.angular
+# Only exists if Bazel was run
+bazel-out
+# dependencies
+node_modules
+# profiling files
+chrome-profiler-events*.json
+
+
+#quarkus log
+.quarkus/
+/server/backend/logs
+/server/frontend/dev-modules.ts
+
+#svn
+.svn
+
+#buildinfo
+**/resources/build-info.json
+**/app/build-info.ts
+
+#dev enviroment
+dev_env
+
+#crash dumps
+core.*.dmp
+Snap.*.trc
+javacore.*.txt

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>org.derbanz.cluborga.backend.service</groupId>
+		<artifactId>cluborga-service</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	
+    <artifactId>cluborga-service-ui</artifactId>
+	
+	<dependencies>
+    <!-- App layer depends on all backend logic -->
+		<dependency>
+			<groupId>org.derbanz.cluborga.backend.logic</groupId>
+			<artifactId>cluborga-logic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.derbanz.cluborga.backend.service</groupId>
+			<artifactId>cluborga-service-common</artifactId>
+		</dependency>
+
+		<!-- Quarkus REST + Jackson -->
+		<!-- https://mvnrepository.com/artifact/${quarkus.platform.group-id}/quarkus-rest -->
+		<dependency>
+			<groupId>${quarkus.platform.group-id}</groupId>
+			<artifactId>quarkus-rest</artifactId>
+			<version>${quarkus.platform.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/${quarkus.platform.group-id}/quarkus-jackson -->
+		<dependency>
+			<groupId>${quarkus.platform.group-id}</groupId>
+			<artifactId>quarkus-jackson</artifactId>
+			<version>${quarkus.platform.version}</version>
+		</dependency>
+
+		<!-- Hibernate ORM + Validator -->
+<!-- https://mvnrepository.com/artifact/${quarkus.platform.group-id}/quarkus-hibernate-orm-panache -->
+		<dependency>
+			<groupId>${quarkus.platform.group-id}</groupId>
+			<artifactId>quarkus-hibernate-orm-panache</artifactId>
+			<version>${quarkus.platform.version}</version>
+		</dependency>
+		<dependency>
+		  <groupId>${quarkus.platform.group-id}</groupId>
+		  <artifactId>quarkus-hibernate-validator</artifactId>
+			<version>${quarkus.platform.version}</version>
+		</dependency>
+
+		<!-- Liquibase -->
+		<dependency>
+		  <groupId>${quarkus.platform.group-id}</groupId>
+		  <artifactId>quarkus-liquibase</artifactId>
+			<version>${quarkus.platform.version}</version>
+		</dependency>
+
+		<!-- PostgreSQL Driver -->
+		<dependency>
+		  <groupId>${quarkus.platform.group-id}</groupId>
+		  <artifactId>quarkus-jdbc-postgresql</artifactId>
+			<version>${quarkus.platform.version}</version>
+		</dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+	  <plugin>
+	    <groupId>${quarkus.platform.group-id}</groupId>
+		<artifactId>quarkus-maven-plugin</artifactId>
+      </plugin>
+	</plugins>
+  </build>
+		
+</project>
