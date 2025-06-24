@@ -62,7 +62,7 @@ public class ApplicationBtoMapper extends BaseBtoMapper {
   public boolean mapToBo(Application bo, ApplicationBto bto) {
     boolean result = mapPropertiesToBo(bto, bo);
     if (bto.getMembershipId() != null) {
-      bo.setMembership(entityManager.getReference(Membership.class, bto.getMembershipId()));
+      bo.setMembership(entityManager.find(Membership.class, bto.getMembershipId()));
     } else {
       bo.setMembership(null);
     }

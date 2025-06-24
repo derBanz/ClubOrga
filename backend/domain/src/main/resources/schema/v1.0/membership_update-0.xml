@@ -1,0 +1,19 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.10.xsd">
+
+    <changeSet id="membership-1-0" author="sebanzian">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyName="fk_application"
+                                        foreignKeyTableName="co_membership"/>
+        </preConditions>
+
+        <addForeignKeyConstraint baseColumnNames="application_id" baseTableName="co_membership"
+                                 constraintName="fk_application" referencedColumnNames="id"
+                                 referencedTableName="co_application"/>
+    </changeSet>
+
+</databaseChangeLog>

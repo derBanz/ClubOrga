@@ -58,6 +58,7 @@ chrome-profiler-events*.json
 .quarkus/
 /server/backend/logs
 /server/frontend/dev-modules.ts
+*.properties
 
 #svn
 .svn

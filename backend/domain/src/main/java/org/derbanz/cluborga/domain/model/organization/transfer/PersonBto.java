@@ -2,6 +2,7 @@ package org.derbanz.cluborga.domain.model.organization.transfer;
 
 import jakarta.validation.Valid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PersonBto extends PersonCoreBto {
@@ -12,6 +13,9 @@ public class PersonBto extends PersonCoreBto {
   private List<ContactBto> contacts;
 
   public List<MembershipBto> getMemberships() {
+    if (memberships == null) {
+      setMemberships(new ArrayList<>());
+    }
     return memberships;
   }
 
@@ -20,6 +24,9 @@ public class PersonBto extends PersonCoreBto {
   }
 
   public List<ContactBto> getContacts() {
+    if (contacts == null) {
+      setContacts(new ArrayList<>());
+    }
     return contacts;
   }
 

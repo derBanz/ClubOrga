@@ -77,7 +77,7 @@ public class PaymentMethodBtoMapper extends BaseBtoMapper {
   public boolean mapToBo(PaymentMethod bo, PaymentMethodBto bto) {
     boolean result = mapPropertiesToBo(bto, bo);
     if (bto.getMembershipId() != null) {
-      bo.setMembership(entityManager.getReference(Membership.class, bto.getMembershipId()));
+      bo.setMembership(entityManager.find(Membership.class, bto.getMembershipId()));
     } else {
       bo.setMembership(null);
     }
