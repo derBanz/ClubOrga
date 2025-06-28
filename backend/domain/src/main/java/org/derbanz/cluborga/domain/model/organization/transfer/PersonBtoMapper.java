@@ -18,11 +18,7 @@ public class PersonBtoMapper extends BaseBtoMapper {
   ContactBtoMapper contactBtoMapper;
 
   private boolean mapPropertiesToBo(PersonCoreBto bto, Person bo) {
-    boolean result =
-      !bo.getName().equals(bto.getName()) ||
-        !bo.getFirstName().equals(bto.getFirstName()) ||
-        !bo.getDateOfBirth().equals(bto.getDateOfBirth()) ||
-        !bo.getGender().equals(bto.getGender());
+    boolean result = checkIsNotEqual(bto, bo);
 
     if (!Objects.isNull(bto.getName())) {
       bo.setName(bto.getName());
@@ -48,7 +44,7 @@ public class PersonBtoMapper extends BaseBtoMapper {
     bto.setGender(bo.getGender());
 
     Boolean isMember = bo.getMemberships().stream().anyMatch(membership -> membership.getStopDate() == null
-      && List.of(MembershipStatus.ACTIVE_MEMBER, MembershipStatus.INACTIVE_MEMBER).contains(membership.getStatus()));
+                                                                             && List.of(MembershipStatus.ACTIVE_MEMBER, MembershipStatus.INACTIVE_MEMBER).contains(membership.getStatus()));
     bto.setIsMember(isMember);
   }
 
@@ -74,5 +70,12 @@ public class PersonBtoMapper extends BaseBtoMapper {
 
   public boolean mapToBo(Person bo, PersonBto bto) {
     return mapPropertiesToBo(bto, bo);
+  }
+
+  private boolean checkIsNotEqual(PersonCoreBto bto, Person bo) {
+    return !Objects.equals(bo.getName(), bto.getName())
+             || !Objects.equals(bo.getFirstName(), bto.getFirstName())
+             || !Objects.equals(bo.getDateOfBirth(), bto.getDateOfBirth())
+             || !Objects.equals(bo.getGender(), bto.getGender());
   }
 }

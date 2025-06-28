@@ -1,6 +1,7 @@
 package org.derbanz.cluborga.domain.model.organization.transfer;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.derbanz.cluborga.domain.base.transfer.BaseBto;
 import org.derbanz.cluborga.domain.enums.MembershipStatus;
 
@@ -25,7 +26,7 @@ public class MembershipCoreBto extends BaseBto {
   @NotEmpty
   private Boolean discount;
 
-  @NotEmpty
+  @NotNull
   private MembershipStatus status;
 
   @NotEmpty

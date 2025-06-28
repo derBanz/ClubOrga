@@ -13,7 +13,7 @@
         </preConditions>
 
         <createTable tableName="co_person">
-            <column name="id" type="VARCHAR(40)">
+            <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="version" type="INTEGER">

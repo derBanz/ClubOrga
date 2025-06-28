@@ -9,6 +9,6 @@ public class BaseBtoMapper {
     bto.setCreationUser(bo.getCreationUser());
     bto.setLastUpdate(bo.getLastUpdate());
     bto.setLastUpdateUser(bo.getCreationUser());
-    bto.setId(bo.getId());
+    bto.setId(bo.getId().toString());
   }
 }

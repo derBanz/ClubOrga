@@ -11,43 +11,43 @@ import java.util.List;
 
 public class BasePersonResource {
 
-    @Inject
-    PersonService service;
+  @Inject
+  PersonService service;
 
-    @POST
-    @Path("validate")
-    public void validate(PersonDto dto) throws ValidationException {
-        service.validate(dto);
-    }
+  @POST
+  @Path("validate")
+  public void validate(PersonDto dto) throws ValidationException {
+    service.validate(dto);
+  }
 
-    @POST
-    @Path("save")
-    public String save(PersonDto dto) throws ValidationException {
-        return service.save(dto);
-    }
+  @POST
+  @Path("save")
+  public String save(PersonDto dto) throws ValidationException {
+    return service.save(dto);
+  }
 
-    @GET
-    @Path("get")
-    @Consumes({MediaType.TEXT_PLAIN})
-    public PersonDto get(@QueryParam("id") String id) {
-        return service.get(id);
-    }
+  @GET
+  @Path("get")
+  @Consumes({MediaType.TEXT_PLAIN})
+  public PersonDto get(@QueryParam("id") String id) {
+    return service.get(id);
+  }
 
-    @GET
-    @Path("getList")
-    public List<PersonDto> getList(@QueryParam("ids") List<String> ids) {
-        return service.getList(ids);
-    }
+  @GET
+  @Path("getList")
+  public List<PersonDto> getList(@QueryParam("ids") List<String> ids) {
+    return service.getList(ids);
+  }
 
-    @GET
-    @Path("getAll")
-    public List<PersonDto> getAll() {
-        return service.getAll();
-    }
+  @GET
+  @Path("getAll")
+  public List<PersonDto> getAll() {
+    return service.getAll();
+  }
 
-    @DELETE
-    @Path("delete")
-    public boolean delete(@QueryParam("id") String id) {
-        return service.delete(id);
-    }
+  @DELETE
+  @Path("delete")
+  public boolean delete(@QueryParam("id") String id) {
+    return service.delete(id);
+  }
 }

@@ -1,6 +1,7 @@
 package org.derbanz.cluborga.domain.model.organization.transfer;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.derbanz.cluborga.domain.base.transfer.BaseBto;
 import org.derbanz.cluborga.domain.enums.Gender;
 
@@ -25,7 +26,7 @@ public class PersonCoreBto extends BaseBto {
 
   private Date dateOfBirth;
 
-  @NotEmpty
+  @NotNull
   private Gender gender;
 
   private Boolean isMember;

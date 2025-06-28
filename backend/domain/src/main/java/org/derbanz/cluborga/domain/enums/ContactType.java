@@ -1,7 +1,7 @@
 package org.derbanz.cluborga.domain.enums;
 
 public enum ContactType {
-    EMAIL,
-    ADDRESS,
-    PHONE
+  EMAIL,
+  ADDRESS,
+  PHONE
 }

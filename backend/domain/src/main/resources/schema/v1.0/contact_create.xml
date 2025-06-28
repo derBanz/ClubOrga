@@ -13,7 +13,7 @@
         </preConditions>
 
         <createTable tableName="co_contact">
-            <column name="id" type="VARCHAR(40)">
+            <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="version" type="INTEGER">
@@ -41,7 +41,7 @@
             <column name="email" type="VARCHAR(255)"/>
             <column name="countrycode" type="VARCHAR(255)"/>
             <column name="phonenumber" type="VARCHAR(255)"/>
-            <column name="person_id" type="VARCHAR(40)">
+            <column name="person_id" type="UUID">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
         </createTable>

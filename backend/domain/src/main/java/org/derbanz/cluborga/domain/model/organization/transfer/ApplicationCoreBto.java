@@ -1,6 +1,7 @@
 package org.derbanz.cluborga.domain.model.organization.transfer;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.derbanz.cluborga.domain.base.transfer.BaseBto;
 import org.derbanz.cluborga.domain.enums.ApplicationStatus;
 
@@ -19,7 +20,7 @@ public class ApplicationCoreBto extends BaseBto {
 
   private Date dateOfReply;
 
-  @NotEmpty
+  @NotNull
   private ApplicationStatus status;
 
   @NotEmpty

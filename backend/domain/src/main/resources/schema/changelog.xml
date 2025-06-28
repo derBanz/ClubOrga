@@ -11,5 +11,4 @@
     <include file="v1.0/membership_create.xml" relativeToChangelogFile="true"/>
     <include file="v1.0/paymentmethod_create.xml" relativeToChangelogFile="true"/>
     <include file="v1.0/application_create.xml" relativeToChangelogFile="true"/>
-    <include file="v1.0/membership_update-0.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

@@ -16,50 +16,50 @@ import java.util.stream.Collectors;
 
 public class BasePersonServiceImpl implements BasePersonService {
 
-    @Inject
-    PersonLogic logic;
-    @Inject
-    PersonDtoMapper dtoMapper;
+  @Inject
+  PersonLogic logic;
+  @Inject
+  PersonDtoMapper dtoMapper;
 
-    @Override
-    public void validate(PersonDto dto) throws ValidationException {
-        PersonBto bto = dtoMapper.toBto(dto);
-        Set<ConstraintViolation<PersonBto>> validationResult = logic.validate(bto);
-        if (!validationResult.isEmpty()) {
-            String message = validationResult.stream()
-                    .map(val -> String.valueOf(val.getPropertyPath()).concat(": ").concat(val.getMessage())).collect(Collectors.joining("\n"));
-            throw new ValidationException(message);
-        }
+  @Override
+  public void validate(PersonDto dto) throws ValidationException {
+    PersonBto bto = dtoMapper.toBto(dto);
+    Set<ConstraintViolation<PersonBto>> validationResult = logic.validate(bto);
+    if (!validationResult.isEmpty()) {
+      String message = validationResult.stream()
+                         .map(val -> String.valueOf(val.getPropertyPath()).concat(": ").concat(val.getMessage())).collect(Collectors.joining("\n"));
+      throw new ValidationException(message);
     }
+  }
 
-    @Override
-    @Transactional
-    public String save(PersonDto dto) throws ValidationException {
-        PersonBto bto = dtoMapper.toBto(dto);
-        logic.save(bto);
-        dto.setId(bto.getId());
-        return dto.getId();
-    }
+  @Override
+  @Transactional
+  public String save(PersonDto dto) throws ValidationException {
+    PersonBto bto = dtoMapper.toBto(dto);
+    logic.save(bto);
+    dto.setId(bto.getId());
+    return dto.getId();
+  }
 
-    @Override
-    public PersonDto get(String id) {
-        PersonBto bto = logic.get(id);
-        return dtoMapper.toDto(bto);
-    }
+  @Override
+  public PersonDto get(String id) {
+    PersonBto bto = logic.get(id);
+    return dtoMapper.toDto(bto);
+  }
 
-    @Override
-    public List<PersonDto> getList(List<String> ids) {
-        return logic.getList(ids).stream().map(dtoMapper::toDto).toList();
-    }
+  @Override
+  public List<PersonDto> getList(List<String> ids) {
+    return logic.getList(ids).stream().map(dtoMapper::toDto).toList();
+  }
 
-    @Override
-    public List<PersonDto> getAll() {
-        return logic.getAll().stream().map(dtoMapper::toDto).toList();
-    }
+  @Override
+  public List<PersonDto> getAll() {
+    return logic.getAll().stream().map(dtoMapper::toDto).toList();
+  }
 
-    @Override
-    @Transactional
-    public boolean delete(String id) {
-        return logic.delete(id);
-    }
+  @Override
+  @Transactional
+  public boolean delete(String id) {
+    return logic.delete(id);
+  }
 }

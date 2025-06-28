@@ -13,7 +13,7 @@
         </preConditions>
 
         <createTable tableName="co_paymentmethod">
-            <column name="id" type="VARCHAR(40)">
+            <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="version" type="INTEGER">
@@ -36,7 +36,7 @@
             <column name="sepamandate" type="BOOLEAN">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="membership_id" type="VARCHAR(40)">
+            <column name="membership_id" type="UUID">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
         </createTable>
