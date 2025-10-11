@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.derbanz.cluborga.domain.base.AbstractBusinessObject;
-import org.derbanz.cluborga.domain.enums.Status;
+import org.derbanz.cluborga.domain.enums.ApplicationStatus;
 
 import java.util.Date;
 
@@ -36,10 +36,9 @@ public class Application extends AbstractBusinessObject {
   @NotEmpty()
   @Enumerated(EnumType.STRING)
   @Access(AccessType.FIELD)
-  private Status status;
+  private ApplicationStatus status;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @NotEmpty()
   private Membership membership;
 
 
@@ -59,11 +58,11 @@ public class Application extends AbstractBusinessObject {
     this.dateOfReply = dateOfReply;
   }
 
-  public Status getStatus() {
+  public ApplicationStatus getStatus() {
     return status;
   }
 
-  public void setStatus(final Status status) {
+  public void setStatus(final ApplicationStatus status) {
     this.status = status;
   }
 

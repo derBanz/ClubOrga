@@ -31,9 +31,7 @@
             <column name="status" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
-            <column name="membership_id" type="UUID">
-                <constraints nullable="false" primaryKey="false"/>
-            </column>
+            <column name="membership_id" type="UUID"/>
         </createTable>
         <addForeignKeyConstraint baseColumnNames="membership_id" baseTableName="co_application"
                                  constraintName="fk_membership" referencedColumnNames="id"

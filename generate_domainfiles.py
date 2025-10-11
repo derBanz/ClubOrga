@@ -1,7 +1,10 @@
 from Banz_domainfile_generator import domainfile_generator as generator
 
-csv = 'organization;Person;name,STRING,required;firstName,STRING;dateOfBirth,DATE;gender,ENUM(Gender/MALE/FEMALE/DIVERSE),required;memberships,INCOMING_REFERENCE(organization.Membership/n);contacts,INCOMING_REFERENCE(organization.Contact/n)'
-csv += '\norganization;Membership;validFrom,DATE,required;validTo,DATE;discount,BOOLEAN,required;status,ENUM(MembershipStatus/APPLICATION/ACTIVE_MEMBER/INACTIVE_MEMBER/FORMER_MEMBER/DECLINED),required;person,REFERENCE(organization.Person/1),required'
+csv = 'organization;Application;applicationDate,DATE,required;dateOfReply,DATE;status,ENUM(ApplicationStatus/APPLICATION/ACCEPTED/DECLINED),required;membership,REFERENCE(organization.Membership/1)'
+csv += '\norganization;Contact;validFrom,DATE,required;validTo,DATE;type,ENUM(ContactType/ADDRESS/PHONE/EMAIL),required;street,STRING;number,STRING;numberSuffix,STRING;postbox,STRING;zip,STRING;city,STRING;country,STRING;countryCode,STRING;phoneNumber,STRING;email,STRING;person,REFERENCE(organization.Person/1),required'
+csv += '\norganization;Membership;validFrom,DATE,required;validTo,DATE;discount,BOOLEAN,required;status,ENUM(MembershipStatus/APPLICATION/ACTIVE_MEMBER/INACTIVE_MEMBER/FORMER_MEMBER/DECLINED),required;person,REFERENCE(organization.Person/1),required;application,INCOMING_REFERENCE(organization.Application/1);paymentMethods,INCOMING_REFERENCE(PaymentMethod/n)'
+csv += '\norganization;PaymentMethod;validFrom,DATE,required;validTo,DATE;iban,STRING,required;bic,STRING;bank,STRING;sepaMandate,BOOLEAN,required;membership,REFERENCE(organization.Membership/1),required'
+csv += '\norganization;Person;name,STRING,required;firstName,STRING;dateOfBirth,DATE;gender,ENUM(Gender/MALE/FEMALE/DIVERSE),required;memberships,INCOMING_REFERENCE(organization.Membership/n);contacts,INCOMING_REFERENCE(organization.Contact/n)'
 
 paths = {
     'domain': '\\backend\\domain\\src\\main\\java\\org\\derbanz\\cluborga\\domain\\',

@@ -1,7 +1,7 @@
 // generated
 package org.derbanz.cluborga.domain.enums;
 
-public enum Status {
+public enum ApplicationStatus {
   APPLICATION,
   ACCEPTED,
   DECLINED,

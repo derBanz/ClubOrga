@@ -7,11 +7,16 @@ import org.derbanz.cluborga.domain.base.transfer.BaseBtoMapper;
 import org.derbanz.cluborga.domain.model.organization.Membership;
 
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class MembershipCoreBtoMapper extends BaseBtoMapper {
 
   @Inject
   EntityManager entityManager;
+  @Inject
+  ApplicationBtoMapper applicationBtoMapper;
+  @Inject
+  PaymentMethodBtoMapper paymentmethodBtoMapper;
   @Inject
   PersonBtoMapper personBtoMapper;
 
@@ -46,6 +51,10 @@ public class MembershipCoreBtoMapper extends BaseBtoMapper {
     if (bo.getPerson() != null) {
       bto.setPerson(personBtoMapper.toBto(bo.getPerson()));
     }
+    if (bo.getApplication() != null) {
+      bto.setApplication(applicationBtoMapper.toBto(bo.getApplication()));
+    }
+    bto.setPaymentMethods(bo.getPaymentMethods().stream().map(paymentmethodBtoMapper::toBto).toList());
   }
 
   public MembershipBto toBto(Membership bo) {
@@ -58,6 +67,10 @@ public class MembershipCoreBtoMapper extends BaseBtoMapper {
     if (bto.getPerson() != null) {
       bo.setPerson(personBtoMapper.toBo(bto.getPerson()));
     }
+    if (bto.getApplication() != null) {
+      bo.setApplication(applicationBtoMapper.toBo(bto.getApplication()));
+    }
+    bo.setPaymentMethods(bto.getPaymentMethods().stream().map(paymentmethodBtoMapper::toBo).collect(Collectors.toSet()));
     return mapPropertiesToBo(bto, bo);
   }
 

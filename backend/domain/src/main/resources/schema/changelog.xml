@@ -7,5 +7,8 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.10.xsd">
 
     <include file="v1.0/person_create.xml" relativeToChangelogFile="true"/>
+    <include file="v1.0/contact_create.xml" relativeToChangelogFile="true"/>
     <include file="v1.0/membership_create.xml" relativeToChangelogFile="true"/>
+    <include file="v1.0/application_create.xml" relativeToChangelogFile="true"/>
+    <include file="v1.0/paymentmethod_create.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

@@ -13,9 +13,13 @@ import jakarta.validation.ValidationException;
 import jakarta.validation.Validator;
 import org.derbanz.cluborga.domain.base.exception.ObjectNotFoundException;
 import org.derbanz.cluborga.domain.model.organization.Membership;
+import org.derbanz.cluborga.domain.model.organization.transfer.ApplicationBto;
 import org.derbanz.cluborga.domain.model.organization.transfer.MembershipBto;
 import org.derbanz.cluborga.domain.model.organization.transfer.MembershipBtoMapper;
+import org.derbanz.cluborga.domain.model.organization.transfer.PaymentMethodBto;
+import org.derbanz.cluborga.logic.organization.ApplicationLogic;
 import org.derbanz.cluborga.logic.organization.BaseMembershipLogic;
+import org.derbanz.cluborga.logic.organization.PaymentMethodLogic;
 import org.jboss.logging.Logger;
 
 import java.util.List;
@@ -33,6 +37,11 @@ public class BaseMembershipLogicImpl implements BaseMembershipLogic {
   Logger log;
   @Inject
   Validator validator;
+
+  @Inject
+  ApplicationLogic applicationLogic;
+  @Inject
+  PaymentMethodLogic paymentmethodLogic;
 
   @Override
   public MembershipBto instantiate() {
@@ -139,5 +148,37 @@ public class BaseMembershipLogicImpl implements BaseMembershipLogic {
   }
 
   protected void handleConnectedObjects(Membership bo, MembershipBto bto) {
+    handleApplication(bo, bto);
+    handlePaymentMethods(bo, bto);
+  }
+
+  private void handleApplication(Membership bo, MembershipBto bto) {
+    String applicationInBto = bto.getApplication() != null ? bto.getApplication().getId() : null;
+    String applicationInBo = bo.getApplication() != null ? bo.getApplication().getId().toString() : null;
+    if (applicationInBo != null && !applicationInBo.equals(applicationInBto)) {
+      applicationLogic.delete(applicationInBo);
+    }
+    if (applicationInBto != null) {
+      ApplicationBto applicationBto = bto.getApplication();
+      if (applicationBto.getMembership() == null) {
+        applicationBto.setMembership(bto);
+      }
+      applicationLogic.save(bto.getApplication());
+    }
+  }
+
+  private void handlePaymentMethods(Membership bo, MembershipBto bto) {
+    // Existing Bos without Bto are outdated and should be deleted
+    List<String> paymentMethodsInBto = bto.getPaymentMethods().stream().map(PaymentMethodBto::getId).toList();
+    bo.getPaymentMethods().stream().map(paymentmethodBo -> paymentmethodBo.getId().toString())
+      .filter(paymentmethod -> !paymentMethodsInBto.contains(paymentmethod))
+      .forEach(paymentmethod -> paymentmethodLogic.delete(paymentmethod));
+
+    bto.getPaymentMethods().forEach(paymentmethodBto -> {
+      if (paymentmethodBto.getMembership() == null) {
+        paymentmethodBto.setMembership(bto);
+      }
+      paymentmethodLogic.save(paymentmethodBto);
+    });
   }
 }
