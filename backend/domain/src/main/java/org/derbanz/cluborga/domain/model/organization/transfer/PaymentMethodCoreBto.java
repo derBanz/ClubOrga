@@ -1,3 +1,4 @@
+// generated
 package org.derbanz.cluborga.domain.model.organization.transfer;
 
 import jakarta.validation.constraints.NotEmpty;
@@ -7,15 +8,6 @@ import java.util.Date;
 import java.util.Objects;
 
 public class PaymentMethodCoreBto extends BaseBto {
-
-  public static final String VALID_FROM = "validFrom";
-  public static final String VALID_TO = "validTo";
-  public static final String IBAN = "iban";
-  public static final String BIC = "bic";
-  public static final String BANK = "bank";
-  public static final String SEPA_MANDATA = "sepaMandate";
-
-  public static final String MEMBERSHIP = "membership";
 
   @NotEmpty
   private Date validFrom;
@@ -33,14 +25,15 @@ public class PaymentMethodCoreBto extends BaseBto {
   private Boolean sepaMandate;
 
   @NotEmpty
-  private String membershipId;
+  private MembershipBto membership;
+
 
   public Date getValidFrom() {
     return validFrom;
   }
 
   public void setValidFrom(Date validFrom) {
-    Objects.requireNonNull(validFrom, "Cannot set validFrom to null");
+    Objects.requireNonNull(validFrom, "ValidFrom cannot be null.");
     this.validFrom = validFrom;
   }
 
@@ -57,7 +50,7 @@ public class PaymentMethodCoreBto extends BaseBto {
   }
 
   public void setIban(String iban) {
-    Objects.requireNonNull(iban, "Cannot set iban to null");
+    Objects.requireNonNull(iban, "Iban cannot be null.");
     this.iban = iban;
   }
 
@@ -82,15 +75,18 @@ public class PaymentMethodCoreBto extends BaseBto {
   }
 
   public void setSepaMandate(Boolean sepaMandate) {
-    Objects.requireNonNull(sepaMandate, "Cannot set sepaMandate to null");
+    Objects.requireNonNull(sepaMandate, "SepaMandate cannot be null.");
     this.sepaMandate = sepaMandate;
   }
 
-  public String getMembershipId() {
-    return membershipId;
+
+  public MembershipBto getMembership() {
+    return membership;
   }
 
-  public void setMembershipId(String membershipId) {
-    this.membershipId = membershipId;
+  public void setMembership(MembershipBto membership) {
+    Objects.requireNonNull(membership, "Membership cannot be null.");
+    this.membership = membership;
   }
+
 }

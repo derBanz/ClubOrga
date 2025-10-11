@@ -1,38 +1,9 @@
 package org.derbanz.cluborga.domain.model.organization.transfer;
 
-import jakarta.validation.Valid;
+import org.derbanz.cluborga.domain.model.organization.validation.PersonValidator;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@PersonValidator
 public class PersonBto extends PersonCoreBto {
-
-  @Valid
-  private List<MembershipBto> memberships;
-  @Valid
-  private List<ContactBto> contacts;
-
-  public List<MembershipBto> getMemberships() {
-    if (memberships == null) {
-      setMemberships(new ArrayList<>());
-    }
-    return memberships;
-  }
-
-  public void setMemberships(List<MembershipBto> memberships) {
-    this.memberships = memberships;
-  }
-
-  public List<ContactBto> getContacts() {
-    if (contacts == null) {
-      setContacts(new ArrayList<>());
-    }
-    return contacts;
-  }
-
-  public void setContacts(List<ContactBto> contacts) {
-    this.contacts = contacts;
-  }
 
   @Override
   public boolean equals(Object object) {

@@ -1,19 +1,15 @@
+// generated
 package org.derbanz.cluborga.domain.model.organization.transfer;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.derbanz.cluborga.domain.base.transfer.BaseBto;
-import org.derbanz.cluborga.domain.enums.ApplicationStatus;
+import org.derbanz.cluborga.domain.enums.Status;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class ApplicationCoreBto extends BaseBto {
-
-  public static final String APPLICATION_DATE = "applicationDate";
-  public static final String DATE_OF_REPLY = "dateOfReply";
-  public static final String STATUS = "status";
-
-  public static final String MEMBERSHIP = "membership";
 
   @NotEmpty
   private Date applicationDate;
@@ -21,16 +17,18 @@ public class ApplicationCoreBto extends BaseBto {
   private Date dateOfReply;
 
   @NotNull
-  private ApplicationStatus status;
+  private Status status;
 
   @NotEmpty
-  private String membershipId;
+  private MembershipBto membership;
+
 
   public Date getApplicationDate() {
     return applicationDate;
   }
 
   public void setApplicationDate(Date applicationDate) {
+    Objects.requireNonNull(applicationDate, "ApplicationDate cannot be null.");
     this.applicationDate = applicationDate;
   }
 
@@ -42,19 +40,23 @@ public class ApplicationCoreBto extends BaseBto {
     this.dateOfReply = dateOfReply;
   }
 
-  public ApplicationStatus getStatus() {
+  public Status getStatus() {
     return status;
   }
 
-  public void setStatus(ApplicationStatus status) {
+  public void setStatus(Status status) {
+    Objects.requireNonNull(status, "Status cannot be null.");
     this.status = status;
   }
 
-  public String getMembershipId() {
-    return membershipId;
+
+  public MembershipBto getMembership() {
+    return membership;
   }
 
-  public void setMembershipId(String membershipId) {
-    this.membershipId = membershipId;
+  public void setMembership(MembershipBto membership) {
+    Objects.requireNonNull(membership, "Membership cannot be null.");
+    this.membership = membership;
   }
+
 }

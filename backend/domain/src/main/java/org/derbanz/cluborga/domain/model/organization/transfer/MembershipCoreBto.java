@@ -1,3 +1,4 @@
+// generated
 package org.derbanz.cluborga.domain.model.organization.transfer;
 
 import jakarta.validation.constraints.NotEmpty;
@@ -10,18 +11,10 @@ import java.util.Objects;
 
 public class MembershipCoreBto extends BaseBto {
 
-  public static final String START_DATE = "startDate";
-  public static final String STOP_DATE = "stopDate";
-  public static final String DISCOUNT = "discount";
-  public static final String STATUS = "status";
-
-  public static final String PERSON = "person";
-  public static final String APPLICATION = "application";
-
   @NotEmpty
-  private Date startDate;
+  private Date validFrom;
 
-  private Date stopDate;
+  private Date validTo;
 
   @NotEmpty
   private Boolean discount;
@@ -30,25 +23,24 @@ public class MembershipCoreBto extends BaseBto {
   private MembershipStatus status;
 
   @NotEmpty
-  private String personId;
+  private PersonBto person;
 
-  private String applicationId;
 
-  public Date getStartDate() {
-    return startDate;
+  public Date getValidFrom() {
+    return validFrom;
   }
 
-  public void setStartDate(Date startDate) {
-    Objects.requireNonNull(startDate, "Cannot set startDate to null");
-    this.startDate = startDate;
+  public void setValidFrom(Date validFrom) {
+    Objects.requireNonNull(validFrom, "ValidFrom cannot be null.");
+    this.validFrom = validFrom;
   }
 
-  public Date getStopDate() {
-    return stopDate;
+  public Date getValidTo() {
+    return validTo;
   }
 
-  public void setStopDate(Date stopDate) {
-    this.stopDate = stopDate;
+  public void setValidTo(Date validTo) {
+    this.validTo = validTo;
   }
 
   public Boolean getDiscount() {
@@ -56,7 +48,7 @@ public class MembershipCoreBto extends BaseBto {
   }
 
   public void setDiscount(Boolean discount) {
-    Objects.requireNonNull(discount, "Cannot set discount to null");
+    Objects.requireNonNull(discount, "Discount cannot be null.");
     this.discount = discount;
   }
 
@@ -65,24 +57,18 @@ public class MembershipCoreBto extends BaseBto {
   }
 
   public void setStatus(MembershipStatus status) {
-    Objects.requireNonNull(status, "Cannot set status to null");
+    Objects.requireNonNull(status, "Status cannot be null.");
     this.status = status;
   }
 
-  public String getPersonId() {
-    return personId;
+
+  public PersonBto getPerson() {
+    return person;
   }
 
-  public void setPersonId(String personId) {
-    Objects.requireNonNull(personId, "Cannot set personId to null");
-    this.personId = personId;
+  public void setPerson(PersonBto person) {
+    Objects.requireNonNull(person, "Person cannot be null.");
+    this.person = person;
   }
 
-  public String getApplicationId() {
-    return applicationId;
-  }
-
-  public void setApplicationId(String applicationId) {
-    this.applicationId = applicationId;
-  }
 }

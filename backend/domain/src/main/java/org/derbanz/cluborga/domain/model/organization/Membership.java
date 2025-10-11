@@ -1,91 +1,75 @@
+// generated
 package org.derbanz.cluborga.domain.model.organization;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.derbanz.cluborga.domain.base.AbstractBusinessObject;
-import org.derbanz.cluborga.domain.base.Caption;
 import org.derbanz.cluborga.domain.enums.MembershipStatus;
 
 import java.util.Date;
 
 @Entity(
-  name = "org.derbanz.cluborga.domain.model.organization.membership"
+  name = "org.derbanz.cluborga.domain.model.organization.Membership"
 )
 @Table(
   name = "co_membership"
 )
-@Caption("") //todo
 public class Membership extends AbstractBusinessObject {
 
-  public static final String START_DATE = "startDate";
-  public static final String STOP_DATE = "stopDate";
+  public static final String VALID_FROM = "validFrom";
+  public static final String VALID_TO = "validTo";
   public static final String DISCOUNT = "discount";
   public static final String STATUS = "status";
 
   public static final String PERSON = "person";
-  public static final String APPLICATION = "application";
 
   @Basic
-  @NotEmpty(
-    message = "" //todo
-  )
-  @Caption("") //todo
+  @NotEmpty()
   @Access(AccessType.FIELD)
-  private Date startDate;
+  private Date validFrom;
 
   @Basic
-  @Caption("") //todo
   @Access(AccessType.FIELD)
-  private Date stopDate;
+  private Date validTo;
 
   @Basic
-  @NotEmpty(
-    message = "" //todo
-  )
-  @Caption("") //todo
+  @NotEmpty()
   @Access(AccessType.FIELD)
   private Boolean discount;
 
   @Basic
-  @NotNull(
-    message = "" //todo
-  )
-  @Caption("") //todo
+  @NotEmpty()
   @Enumerated(EnumType.STRING)
   @Access(AccessType.FIELD)
   private MembershipStatus status;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @NotEmpty(
-    message = "" //todo
-  )
+  @NotEmpty()
   private Person person;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  private Application application;
 
-  public Date getStartDate() {
-    return startDate;
+  public Date getValidFrom() {
+    return validFrom;
   }
 
-  public void setStartDate(Date startDate) {
-    this.startDate = startDate;
+  public void setValidFrom(final Date validFrom) {
+    this.validFrom = validFrom;
   }
 
-  public Date getStopDate() {
-    return stopDate;
+  public Date getValidTo() {
+    return validTo;
   }
 
-  public void setStopDate(Date stopDate) {
-    this.stopDate = stopDate;
+  public void setValidTo(final Date validTo) {
+    this.validTo = validTo;
   }
 
   public Boolean getDiscount() {
     return discount;
   }
 
-  public void setDiscount(Boolean discount) {
+  public void setDiscount(final Boolean discount) {
     this.discount = discount;
   }
 
@@ -93,23 +77,17 @@ public class Membership extends AbstractBusinessObject {
     return status;
   }
 
-  public void setStatus(MembershipStatus status) {
+  public void setStatus(final MembershipStatus status) {
     this.status = status;
   }
+
 
   public Person getPerson() {
     return person;
   }
 
-  public void setPerson(Person person) {
+  public void setPerson(final Person person) {
     this.person = person;
   }
 
-  public Application getApplication() {
-    return application;
-  }
-
-  public void setApplication(Application application) {
-    this.application = application;
-  }
 }

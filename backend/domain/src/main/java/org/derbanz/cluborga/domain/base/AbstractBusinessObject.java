@@ -1,3 +1,4 @@
+// generated
 package org.derbanz.cluborga.domain.base;
 
 import jakarta.persistence.*;
@@ -69,7 +70,7 @@ public class AbstractBusinessObject implements Serializable {
     return this.version;
   }
 
-  protected void setVersion(int version) {
+  public void setVersion(int version) {
     this.version = version;
   }
 
@@ -77,18 +78,35 @@ public class AbstractBusinessObject implements Serializable {
     return this.creation;
   }
 
-  public Timestamp getLastUpdate() {
-    return this.lastUpdate;
+  public void setCreation(Timestamp creation) {
+    this.creation = creation;
   }
 
   public String getCreationUser() {
     return this.creationUser;
   }
 
+  public void setCreationUser(String creationUser) {
+    this.creationUser = creationUser;
+  }
+
+  public Timestamp getLastUpdate() {
+    return this.lastUpdate;
+  }
+
+  public void setLastUpdate(Timestamp lastUpdate) {
+    this.lastUpdate = lastUpdate;
+  }
+
   public String getLastUpdateUser() {
     return this.lastUpdateUser;
   }
 
+  public void setLastUpdateUser(String lastUpdateUser) {
+    this.lastUpdateUser = lastUpdateUser;
+  }
+
+  @Override
   public boolean equals(Object object) {
     if (this == object) {
       return true;
@@ -101,7 +119,6 @@ public class AbstractBusinessObject implements Serializable {
   }
 
   private String getCurrentUsername() {
-    //todo
     return "system";
   }
 }

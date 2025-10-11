@@ -1,3 +1,4 @@
+// generated
 package org.derbanz.cluborga.logic.organization;
 
 import jakarta.validation.ConstraintViolation;

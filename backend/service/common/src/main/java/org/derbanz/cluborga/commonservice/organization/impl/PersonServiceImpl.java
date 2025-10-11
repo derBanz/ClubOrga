@@ -4,8 +4,7 @@ import io.quarkus.arc.Unremovable;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.derbanz.cluborga.commonservice.organization.PersonService;
 
-
-@ApplicationScoped
 @Unremovable
+@ApplicationScoped
 public class PersonServiceImpl extends BasePersonServiceImpl implements PersonService {
 }

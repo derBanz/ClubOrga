@@ -1,23 +1,18 @@
+// generated
 package org.derbanz.cluborga.domain.model.organization.transfer;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.derbanz.cluborga.domain.base.transfer.BaseBto;
 import org.derbanz.cluborga.domain.enums.Gender;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class PersonCoreBto extends BaseBto {
-
-  public static final String NAME = "name";
-  public static final String FIRST_NAME = "firstName";
-  public static final String DATE_OF_BIRTH = "dateOfBirth";
-  public static final String GENDER = "gender";
-  public static final String IS_MEMBER = "isMember";
-
-  public static final String MEMBERSHIPS = "memberships";
-  public static final String CONTACTS = "contacts";
 
   @NotEmpty
   private String name;
@@ -29,14 +24,19 @@ public class PersonCoreBto extends BaseBto {
   @NotNull
   private Gender gender;
 
-  private Boolean isMember;
+  @Valid
+  private List<MembershipBto> memberships;
+
+  @Valid
+  private List<ContactBto> contacts;
+
 
   public String getName() {
     return name;
   }
 
   public void setName(String name) {
-    Objects.requireNonNull(name, "Cannot set name to null");
+    Objects.requireNonNull(name, "Name cannot be null.");
     this.name = name;
   }
 
@@ -61,15 +61,30 @@ public class PersonCoreBto extends BaseBto {
   }
 
   public void setGender(Gender gender) {
-    Objects.requireNonNull(gender, "Cannot set gender to null");
+    Objects.requireNonNull(gender, "Gender cannot be null.");
     this.gender = gender;
   }
 
-  public Boolean isMember() {
-    return isMember;
+  public List<MembershipBto> getMemberships() {
+    if (memberships == null) {
+      setMemberships(new ArrayList<>());
+    }
+    return memberships;
   }
 
-  public void setIsMember(Boolean isMember) {
-    this.isMember = isMember;
+  public void setMemberships(List<MembershipBto> memberships) {
+    this.memberships = memberships;
   }
+
+  public List<ContactBto> getContacts() {
+    if (contacts == null) {
+      setContacts(new ArrayList<>());
+    }
+    return contacts;
+  }
+
+  public void setContacts(List<ContactBto> contacts) {
+    this.contacts = contacts;
+  }
+
 }

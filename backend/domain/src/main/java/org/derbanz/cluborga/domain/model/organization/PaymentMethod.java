@@ -1,20 +1,19 @@
+// generated
 package org.derbanz.cluborga.domain.model.organization;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.derbanz.cluborga.domain.base.AbstractBusinessObject;
-import org.derbanz.cluborga.domain.base.Caption;
 
 import java.util.Date;
 
-
 @Entity(
-  name = "org.derbanz.cluborga.domain.model.organization.paymentmethod"
+  name = "org.derbanz.cluborga.domain.model.organization.PaymentMethod"
 )
 @Table(
   name = "co_paymentmethod"
 )
-@Caption("") //todo
 public class PaymentMethod extends AbstractBusinessObject {
 
   public static final String VALID_FROM = "validFrom";
@@ -22,60 +21,47 @@ public class PaymentMethod extends AbstractBusinessObject {
   public static final String IBAN = "iban";
   public static final String BIC = "bic";
   public static final String BANK = "bank";
-  public static final String SEPA_MANDATA = "sepaMandate";
+  public static final String SEPA_MANDATE = "sepaMandate";
 
   public static final String MEMBERSHIP = "membership";
 
   @Basic
-  @NotEmpty(
-    message = "" //todo
-  )
-  @Caption("") //todo
+  @NotEmpty()
   @Access(AccessType.FIELD)
   private Date validFrom;
 
   @Basic
-  @Caption("") //todo
   @Access(AccessType.FIELD)
   private Date validTo;
 
   @Basic
-  @NotEmpty(
-    message = "" //todo
-  )
-  @Caption("") //todo
+  @NotEmpty()
   @Access(AccessType.FIELD)
   private String iban;
 
   @Basic
-  @Caption("") //todo
   @Access(AccessType.FIELD)
   private String bic;
 
   @Basic
-  @Caption("") //todo
   @Access(AccessType.FIELD)
   private String bank;
 
   @Basic
-  @NotEmpty(
-    message = "" //todo
-  )
-  @Caption("") //todo
+  @NotEmpty()
   @Access(AccessType.FIELD)
   private Boolean sepaMandate;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @NotEmpty(
-    message = "" //todo
-  )
+  @NotEmpty()
   private Membership membership;
+
 
   public Date getValidFrom() {
     return validFrom;
   }
 
-  public void setValidFrom(Date validFrom) {
+  public void setValidFrom(final Date validFrom) {
     this.validFrom = validFrom;
   }
 
@@ -83,7 +69,7 @@ public class PaymentMethod extends AbstractBusinessObject {
     return validTo;
   }
 
-  public void setValidTo(Date validTo) {
+  public void setValidTo(final Date validTo) {
     this.validTo = validTo;
   }
 
@@ -91,7 +77,7 @@ public class PaymentMethod extends AbstractBusinessObject {
     return iban;
   }
 
-  public void setIban(String iban) {
+  public void setIban(final String iban) {
     this.iban = iban;
   }
 
@@ -99,7 +85,7 @@ public class PaymentMethod extends AbstractBusinessObject {
     return bic;
   }
 
-  public void setBic(String bic) {
+  public void setBic(final String bic) {
     this.bic = bic;
   }
 
@@ -107,7 +93,7 @@ public class PaymentMethod extends AbstractBusinessObject {
     return bank;
   }
 
-  public void setBank(String bank) {
+  public void setBank(final String bank) {
     this.bank = bank;
   }
 
@@ -115,15 +101,17 @@ public class PaymentMethod extends AbstractBusinessObject {
     return sepaMandate;
   }
 
-  public void setSepaMandate(Boolean sepaMandate) {
+  public void setSepaMandate(final Boolean sepaMandate) {
     this.sepaMandate = sepaMandate;
   }
+
 
   public Membership getMembership() {
     return membership;
   }
 
-  public void setMembership(Membership membership) {
+  public void setMembership(final Membership membership) {
     this.membership = membership;
   }
+
 }

@@ -11,4 +11,4 @@ quarkus.hibernate-orm.validate-in-dev-mode=true
 # Liquibase
 quarkus.liquibase.migrate-at-start=true
 quarkus.liquibase.default-schema=<schema>
-quarkus.liquibase.change-log=classpath:schema/liquibase/changelog.xml
+quarkus.liquibase.change-log=classpath:schema/changelog.xml

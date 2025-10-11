@@ -1,3 +1,4 @@
+// generated
 package org.derbanz.cluborga.logic.organization;
 
 import jakarta.validation.ConstraintViolation;
@@ -20,7 +21,7 @@ public interface BaseMembershipLogic {
 
   boolean save(MembershipBto bto);
 
-  void delete(MembershipBto bto);
+  boolean delete(MembershipBto bto);
 
-  void delete(String id);
+  boolean delete(String id);
 }

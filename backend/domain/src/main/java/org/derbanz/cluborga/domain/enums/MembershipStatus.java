@@ -1,3 +1,4 @@
+// generated
 package org.derbanz.cluborga.domain.enums;
 
 public enum MembershipStatus {
@@ -5,5 +6,5 @@ public enum MembershipStatus {
   ACTIVE_MEMBER,
   INACTIVE_MEMBER,
   FORMER_MEMBER,
-  DECLINED;
+  DECLINED,
 }

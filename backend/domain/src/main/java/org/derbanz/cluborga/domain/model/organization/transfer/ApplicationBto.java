@@ -1,5 +1,8 @@
 package org.derbanz.cluborga.domain.model.organization.transfer;
 
+import org.derbanz.cluborga.domain.model.organization.validation.ApplicationValidator;
+
+@ApplicationValidator
 public class ApplicationBto extends ApplicationCoreBto {
 
   @Override

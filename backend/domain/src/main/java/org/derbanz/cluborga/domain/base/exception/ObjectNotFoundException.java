@@ -1,3 +1,4 @@
+// generated
 package org.derbanz.cluborga.domain.base.exception;
 
 public class ObjectNotFoundException extends RuntimeException {

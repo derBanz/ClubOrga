@@ -1,3 +1,4 @@
+// generated
 package org.derbanz.cluborga.domain.base.transfer;
 
 import org.derbanz.cluborga.domain.base.AbstractBusinessObject;

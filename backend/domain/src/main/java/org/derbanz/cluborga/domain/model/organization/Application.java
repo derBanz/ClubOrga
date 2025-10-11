@@ -1,21 +1,20 @@
+// generated
 package org.derbanz.cluborga.domain.model.organization;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.derbanz.cluborga.domain.base.AbstractBusinessObject;
-import org.derbanz.cluborga.domain.base.Caption;
-import org.derbanz.cluborga.domain.enums.ApplicationStatus;
+import org.derbanz.cluborga.domain.enums.Status;
 
 import java.util.Date;
 
 @Entity(
-  name = "org.derbanz.cluborga.domain.model.organization.application"
+  name = "org.derbanz.cluborga.domain.model.organization.Application"
 )
 @Table(
   name = "co_application"
 )
-@Caption("") //todo
 public class Application extends AbstractBusinessObject {
 
   public static final String APPLICATION_DATE = "applicationDate";
@@ -25,38 +24,30 @@ public class Application extends AbstractBusinessObject {
   public static final String MEMBERSHIP = "membership";
 
   @Basic
-  @NotEmpty(
-    message = "" //todo
-  )
-  @Caption("") //todo
+  @NotEmpty()
   @Access(AccessType.FIELD)
   private Date applicationDate;
 
   @Basic
-  @Caption("") //todo
   @Access(AccessType.FIELD)
   private Date dateOfReply;
 
   @Basic
-  @NotNull(
-    message = "" //todo
-  )
-  @Caption("") //todo
+  @NotEmpty()
   @Enumerated(EnumType.STRING)
   @Access(AccessType.FIELD)
-  private ApplicationStatus status;
+  private Status status;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @NotEmpty(
-    message = "" //todo
-  )
+  @ManyToOne(fetch = FetchType.LAZY)
+  @NotEmpty()
   private Membership membership;
+
 
   public Date getApplicationDate() {
     return applicationDate;
   }
 
-  public void setApplicationDate(Date applicationDate) {
+  public void setApplicationDate(final Date applicationDate) {
     this.applicationDate = applicationDate;
   }
 
@@ -64,23 +55,25 @@ public class Application extends AbstractBusinessObject {
     return dateOfReply;
   }
 
-  public void setDateOfReply(Date dateOfReply) {
+  public void setDateOfReply(final Date dateOfReply) {
     this.dateOfReply = dateOfReply;
   }
 
-  public ApplicationStatus getStatus() {
+  public Status getStatus() {
     return status;
   }
 
-  public void setStatus(ApplicationStatus status) {
+  public void setStatus(final Status status) {
     this.status = status;
   }
+
 
   public Membership getMembership() {
     return membership;
   }
 
-  public void setMembership(Membership membership) {
+  public void setMembership(final Membership membership) {
     this.membership = membership;
   }
+
 }

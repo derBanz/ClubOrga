@@ -1,10 +1,10 @@
+// generated
 package org.derbanz.cluborga.domain.model.organization;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.derbanz.cluborga.domain.base.AbstractBusinessObject;
-import org.derbanz.cluborga.domain.base.Caption;
 import org.derbanz.cluborga.domain.enums.Gender;
 
 import java.util.Date;
@@ -12,12 +12,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity(
-  name = "org.derbanz.cluborga.domain.model.organization.person"
+  name = "org.derbanz.cluborga.domain.model.organization.Person"
 )
 @Table(
   name = "co_person"
 )
-@Caption("") //todo
 public class Person extends AbstractBusinessObject {
 
   public static final String NAME = "name";
@@ -29,28 +28,20 @@ public class Person extends AbstractBusinessObject {
   public static final String CONTACTS = "contacts";
 
   @Basic
-  @NotEmpty(
-    message = "" //todo
-  )
-  @Caption("") //todo
+  @NotEmpty()
   @Access(AccessType.FIELD)
   private String name;
 
   @Basic
-  @Caption("") //todo
   @Access(AccessType.FIELD)
   private String firstName;
 
   @Basic
-  @Caption("") //todo
   @Access(AccessType.FIELD)
   private Date dateOfBirth;
 
   @Basic
-  @NotNull(
-    message = "" //todo
-  )
-  @Caption("") //todo
+  @NotEmpty()
   @Enumerated(EnumType.STRING)
   @Access(AccessType.FIELD)
   private Gender gender;
@@ -59,7 +50,6 @@ public class Person extends AbstractBusinessObject {
     cascade = {
       CascadeType.REMOVE
     },
-    mappedBy = "person",
     fetch = FetchType.LAZY,
     orphanRemoval = true
   )
@@ -69,17 +59,17 @@ public class Person extends AbstractBusinessObject {
     cascade = {
       CascadeType.REMOVE
     },
-    mappedBy = "person",
     fetch = FetchType.LAZY,
     orphanRemoval = true
   )
   private Set<Contact> contacts;
 
+
   public String getName() {
     return name;
   }
 
-  public void setName(String name) {
+  public void setName(final String name) {
     this.name = name;
   }
 
@@ -87,7 +77,7 @@ public class Person extends AbstractBusinessObject {
     return firstName;
   }
 
-  public void setFirstName(String firstName) {
+  public void setFirstName(final String firstName) {
     this.firstName = firstName;
   }
 
@@ -95,7 +85,7 @@ public class Person extends AbstractBusinessObject {
     return dateOfBirth;
   }
 
-  public void setDateOfBirth(Date dateOfBirth) {
+  public void setDateOfBirth(final Date dateOfBirth) {
     this.dateOfBirth = dateOfBirth;
   }
 
@@ -103,18 +93,16 @@ public class Person extends AbstractBusinessObject {
     return gender;
   }
 
-  public void setGender(Gender gender) {
+  public void setGender(final Gender gender) {
     this.gender = gender;
   }
 
+
   public Set<Membership> getMemberships() {
-    if (this.memberships == null) {
-      this.setMemberships(new HashSet<>());
-    }
     return memberships;
   }
 
-  public void setMemberships(Set<Membership> memberships) {
+  public void setMemberships(final Set<Membership> memberships) {
     this.memberships = memberships;
   }
 
@@ -123,27 +111,16 @@ public class Person extends AbstractBusinessObject {
       return false;
     }
     membership.setPerson(this);
-    if (!this.memberships.contains(membership)) {
+    if (!(this.memberships.contains(membership))) {
       return this.memberships.add(membership);
     }
     return false;
   }
-
-  public boolean removeMembership(final Membership membership) {
-    if (membership == null) {
-      return false;
-    }
-    return this.memberships.remove(membership);
-  }
-
   public Set<Contact> getContacts() {
-    if (this.contacts == null) {
-      this.setContacts(new HashSet<>());
-    }
     return contacts;
   }
 
-  public void setContacts(Set<Contact> contacts) {
+  public void setContacts(final Set<Contact> contacts) {
     this.contacts = contacts;
   }
 
@@ -152,20 +129,9 @@ public class Person extends AbstractBusinessObject {
       return false;
     }
     contact.setPerson(this);
-    if (!this.contacts.contains(contact)) {
+    if (!(this.contacts.contains(contact))) {
       return this.contacts.add(contact);
     }
     return false;
-  }
-
-  public boolean removeContact(final Contact contact) {
-    if (contact == null) {
-      return false;
-    }
-    return this.contacts.remove(contact);
-  }
-
-  public String toString() {
-    return String.format("Person : %s (%s %s)", this.getId().toString(), this.getFirstName(), this.getName());
   }
 }

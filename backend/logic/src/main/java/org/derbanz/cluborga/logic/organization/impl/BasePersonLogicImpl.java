@@ -1,6 +1,6 @@
+// generated
 package org.derbanz.cluborga.logic.organization.impl;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -13,6 +13,8 @@ import jakarta.validation.ValidationException;
 import jakarta.validation.Validator;
 import org.derbanz.cluborga.domain.base.exception.ObjectNotFoundException;
 import org.derbanz.cluborga.domain.model.organization.Person;
+import org.derbanz.cluborga.domain.model.organization.transfer.ContactBto;
+import org.derbanz.cluborga.domain.model.organization.transfer.MembershipBto;
 import org.derbanz.cluborga.domain.model.organization.transfer.PersonBto;
 import org.derbanz.cluborga.domain.model.organization.transfer.PersonBtoMapper;
 import org.derbanz.cluborga.logic.organization.BasePersonLogic;
@@ -25,27 +27,26 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@ApplicationScoped
 public class BasePersonLogicImpl implements BasePersonLogic {
 
   @Inject
   PersonBtoMapper btoMapper;
   @Inject
-  Validator validator;
-  @Inject
   EntityManager entityManager;
   @Inject
   Logger log;
+  @Inject
+  Validator validator;
 
   @Inject
-  MembershipLogic membershipLogic;
-  @Inject
   ContactLogic contactLogic;
+  @Inject
+  MembershipLogic membershipLogic;
 
   @Override
   public PersonBto instantiate() {
     PersonBto bto = new PersonBto();
-    // insert default parameters
+    // override in logic to insert default parameters
     return bto;
   }
 
@@ -60,8 +61,7 @@ public class BasePersonLogicImpl implements BasePersonLogic {
   }
 
   @Override
-  @Transactional
-  public List<PersonBto> getList(List<String> ids) {
+  @Transactional  public List<PersonBto> getList(List<String> ids) {
     List<UUID> idList = ids.stream().map(UUID::fromString).toList();
     CriteriaBuilder cb = entityManager.getCriteriaBuilder();
     CriteriaQuery<Person> query = cb.createQuery(Person.class);
@@ -72,8 +72,7 @@ public class BasePersonLogicImpl implements BasePersonLogic {
   }
 
   @Override
-  @Transactional
-  public List<PersonBto> getAll() {
+  @Transactional  public List<PersonBto> getAll() {
     CriteriaBuilder cb = entityManager.getCriteriaBuilder();
     CriteriaQuery<Person> query = cb.createQuery(Person.class);
     Root<Person> root = query.from(Person.class);
@@ -92,7 +91,8 @@ public class BasePersonLogicImpl implements BasePersonLogic {
     Set<? extends ConstraintViolation<?>> validationResult = validate(bto);
     if (!validationResult.isEmpty()) {
       String message = validationResult.stream()
-                         .map(val -> String.valueOf(val.getPropertyPath()).concat(": ").concat(val.getMessage())).collect(Collectors.joining("\n"));
+                         .map(val -> String.valueOf(val.getPropertyPath()).concat(": ").concat(val.getMessage()))
+                         .collect(Collectors.joining("\n"));
       throw new ValidationException(message);
     }
     if (bto.getId() == null || bto.getId().isEmpty()) {
@@ -104,13 +104,13 @@ public class BasePersonLogicImpl implements BasePersonLogic {
       bto.setCreationUser(bo.getCreationUser());
       bto.setLastUpdate(bo.getLastUpdate());
       bto.setLastUpdateUser(bo.getLastUpdateUser());
-      handleConnectedObjects(bto, bo);
+      handleConnectedObjects(bo, bto);
       log.info(String.format("%s created", bo));
       return true;
     } else {
       Person bo = getBo(bto.getId());
       boolean changes = btoMapper.mapToBo(bo, bto);
-      handleConnectedObjects(bto, bo);
+      handleConnectedObjects(bo, bto);
       if (changes) {
         entityManager.merge(bo);
         bto.setLastUpdate(bo.getLastUpdate());
@@ -122,8 +122,10 @@ public class BasePersonLogicImpl implements BasePersonLogic {
     }
   }
 
-  @Override
-  public boolean delete(PersonBto bto) {
+  @Override  public boolean delete(PersonBto bto) {
+    if (bto == null) {
+      log.warn("Person not found for deletion.");
+    }
     return delete(bto.getId());
   }
 
@@ -136,7 +138,7 @@ public class BasePersonLogicImpl implements BasePersonLogic {
       log.info(String.format("%s deleted.", bo));
       return true;
     } else {
-      log.warn(String.format("Person not found for deletion: %s", id));
+      log.warn(String.format("Person with id %s not found for deletion.", id));
       return false;
     }
   }
@@ -145,28 +147,38 @@ public class BasePersonLogicImpl implements BasePersonLogic {
     return entityManager.find(Person.class, UUID.fromString(id));
   }
 
-  protected void handleConnectedObjects(PersonBto bto, Person bo) {
-    this.handleMemberships(bto, bo);
-    this.handleContacts(bto, bo);
+  protected void handleConnectedObjects(Person bo, PersonBto bto) {
+    handleMemberships(bo, bto);
+    handleContacts(bo, bto);
   }
 
-  private void handleMemberships(PersonBto bto, Person bo) {
+  private void handleMemberships(Person bo, PersonBto bto) {
     // Existing Bos without Bto are outdated and should be deleted
-    bo.getMemberships().forEach(membershipBo -> {
-      if (bto.getMemberships().stream().noneMatch(membershipBto -> membershipBo.getId().equals(membershipBto.getId()))) {
-        membershipLogic.delete(membershipBo.getId().toString());
-      }
-    });
+    List<String> membershipsInBto = bto.getMemberships().stream().map(MembershipBto::getId).toList();
+    bo.getMemberships().stream().map(membershipBo -> membershipBo.getId().toString())
+      .filter(membership -> !membershipsInBto.contains(membership))
+      .forEach(membership -> membershipLogic.delete(membership));
+
     bto.getMemberships().forEach(membershipBto -> {
-      // update personId for memberships
-      if (membershipBto.getPersonId() == null || membershipBto.getPersonId().isEmpty()) {
-        membershipBto.setPersonId(bo.getId().toString());
+      if (membershipBto.getPerson() == null) {
+        membershipBto.setPerson(bto);
       }
       membershipLogic.save(membershipBto);
     });
   }
 
-  private void handleContacts(PersonBto bto, Person bo) {
-    //todo
+  private void handleContacts(Person bo, PersonBto bto) {
+    // Existing Bos without Bto are outdated and should be deleted
+    List<String> contactsInBto = bto.getContacts().stream().map(ContactBto::getId).toList();
+    bo.getContacts().stream().map(contactBo -> contactBo.getId().toString())
+      .filter(contact -> !contactsInBto.contains(contact))
+      .forEach(contact -> contactLogic.delete(contact));
+
+    bto.getContacts().forEach(contactBto -> {
+      if (contactBto.getPerson() == null) {
+        contactBto.setPerson(bto);
+      }
+      contactLogic.save(contactBto);
+    });
   }
 }

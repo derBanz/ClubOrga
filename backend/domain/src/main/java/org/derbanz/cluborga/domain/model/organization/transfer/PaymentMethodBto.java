@@ -1,5 +1,8 @@
 package org.derbanz.cluborga.domain.model.organization.transfer;
 
+import org.derbanz.cluborga.domain.model.organization.validation.PaymentMethodValidator;
+
+@PaymentMethodValidator
 public class PaymentMethodBto extends PaymentMethodCoreBto {
 
   @Override

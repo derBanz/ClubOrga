@@ -1,3 +1,4 @@
+// generated
 package org.derbanz.cluborga.commonservice.organization.impl;
 
 import jakarta.inject.Inject;
@@ -19,11 +20,11 @@ public class BasePersonServiceImpl implements BasePersonService {
   @Inject
   PersonLogic logic;
   @Inject
-  PersonDtoMapper dtoMapper;
+  PersonDtoMapper mapper;
 
   @Override
   public void validate(PersonDto dto) throws ValidationException {
-    PersonBto bto = dtoMapper.toBto(dto);
+    PersonBto bto = mapper.toBto(dto);
     Set<ConstraintViolation<PersonBto>> validationResult = logic.validate(bto);
     if (!validationResult.isEmpty()) {
       String message = validationResult.stream()
@@ -35,7 +36,7 @@ public class BasePersonServiceImpl implements BasePersonService {
   @Override
   @Transactional
   public String save(PersonDto dto) throws ValidationException {
-    PersonBto bto = dtoMapper.toBto(dto);
+    PersonBto bto = mapper.toBto(dto);
     logic.save(bto);
     dto.setId(bto.getId());
     return dto.getId();
@@ -44,17 +45,17 @@ public class BasePersonServiceImpl implements BasePersonService {
   @Override
   public PersonDto get(String id) {
     PersonBto bto = logic.get(id);
-    return dtoMapper.toDto(bto);
+    return mapper.toDto(bto);
   }
 
   @Override
   public List<PersonDto> getList(List<String> ids) {
-    return logic.getList(ids).stream().map(dtoMapper::toDto).toList();
+    return logic.getList(ids).stream().map(mapper::toDto).toList();
   }
 
   @Override
   public List<PersonDto> getAll() {
-    return logic.getAll().stream().map(dtoMapper::toDto).toList();
+    return logic.getAll().stream().map(mapper::toDto).toList();
   }
 
   @Override

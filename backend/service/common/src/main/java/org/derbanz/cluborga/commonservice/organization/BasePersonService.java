@@ -1,3 +1,4 @@
+// generated
 package org.derbanz.cluborga.commonservice.organization;
 
 import jakarta.validation.ValidationException;

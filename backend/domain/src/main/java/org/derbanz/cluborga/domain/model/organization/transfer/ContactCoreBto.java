@@ -1,3 +1,4 @@
+// generated
 package org.derbanz.cluborga.domain.model.organization.transfer;
 
 import jakarta.validation.constraints.NotEmpty;
@@ -9,25 +10,6 @@ import java.util.Date;
 import java.util.Objects;
 
 public class ContactCoreBto extends BaseBto {
-
-  public static final String VALID_FROM = "validFrom";
-  public static final String VALID_TO = "validTo";
-  public static final String TYPE = "type";
-
-  public static final String STREET = "street";
-  public static final String NUMBER = "number";
-  public static final String NUMBER_SUFFIX = "numberSuffix";
-  public static final String POSTBOX = "postbox";
-  public static final String ZIP = "zip";
-  public static final String CITY = "city";
-  public static final String COUNTRY = "country";
-
-  public static final String EMAIL = "email";
-
-  public static final String COUNTRY_CODE = "countryCode";
-  public static final String PHONE_NUMBER = "phoneNumber";
-
-  public static final String PERSON = "person";
 
   @NotEmpty
   private Date validFrom;
@@ -51,23 +33,22 @@ public class ContactCoreBto extends BaseBto {
 
   private String country;
 
-  private Boolean isPostbox;
-
-  private String email;
-
   private String countryCode;
 
   private String phoneNumber;
 
+  private String email;
+
   @NotEmpty
-  private String personId;
+  private PersonBto person;
+
 
   public Date getValidFrom() {
     return validFrom;
   }
 
   public void setValidFrom(Date validFrom) {
-    Objects.requireNonNull(validFrom, "Cannot set validFrom to null");
+    Objects.requireNonNull(validFrom, "ValidFrom cannot be null.");
     this.validFrom = validFrom;
   }
 
@@ -84,7 +65,7 @@ public class ContactCoreBto extends BaseBto {
   }
 
   public void setType(ContactType type) {
-    Objects.requireNonNull(type, "Cannot set type to null");
+    Objects.requireNonNull(type, "Type cannot be null.");
     this.type = type;
   }
 
@@ -116,16 +97,8 @@ public class ContactCoreBto extends BaseBto {
     return postbox;
   }
 
-  public boolean isPostbox() {
-    return this.isPostbox;
-  }
-
   public void setPostbox(String postbox) {
     this.postbox = postbox;
-  }
-
-  public void setIsPostbox(Boolean isPostbox) {
-    this.isPostbox = isPostbox;
   }
 
   public String getZip() {
@@ -152,14 +125,6 @@ public class ContactCoreBto extends BaseBto {
     this.country = country;
   }
 
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
   public String getCountryCode() {
     return countryCode;
   }
@@ -176,12 +141,22 @@ public class ContactCoreBto extends BaseBto {
     this.phoneNumber = phoneNumber;
   }
 
-  public String getPersonId() {
-    return personId;
+  public String getEmail() {
+    return email;
   }
 
-  public void setPersonId(String personId) {
-    Objects.requireNonNull(personId, "Cannot set personId to null");
-    this.personId = personId;
+  public void setEmail(String email) {
+    this.email = email;
   }
+
+
+  public PersonBto getPerson() {
+    return person;
+  }
+
+  public void setPerson(PersonBto person) {
+    Objects.requireNonNull(person, "Person cannot be null.");
+    this.person = person;
+  }
+
 }

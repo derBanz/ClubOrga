@@ -1,29 +1,25 @@
+// generated
 package org.derbanz.cluborga.domain.model.organization;
-
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.derbanz.cluborga.domain.base.AbstractBusinessObject;
-import org.derbanz.cluborga.domain.base.Caption;
 import org.derbanz.cluborga.domain.enums.ContactType;
-import org.derbanz.cluborga.domain.i18n.Constants;
 
 import java.util.Date;
 
 @Entity(
-  name = "org.derbanz.cluborga.domain.model.organization.contact"
+  name = "org.derbanz.cluborga.domain.model.organization.Contact"
 )
 @Table(
   name = "co_contact"
 )
-@Caption("") //todo
 public class Contact extends AbstractBusinessObject {
 
   public static final String VALID_FROM = "validFrom";
   public static final String VALID_TO = "validTo";
   public static final String TYPE = "type";
-
   public static final String STREET = "street";
   public static final String NUMBER = "number";
   public static final String NUMBER_SUFFIX = "numberSuffix";
@@ -31,101 +27,77 @@ public class Contact extends AbstractBusinessObject {
   public static final String ZIP = "zip";
   public static final String CITY = "city";
   public static final String COUNTRY = "country";
-
-  public static final String EMAIL = "email";
-
   public static final String COUNTRY_CODE = "countryCode";
   public static final String PHONE_NUMBER = "phoneNumber";
+  public static final String EMAIL = "email";
 
   public static final String PERSON = "person";
 
   @Basic
-  @NotEmpty(
-    message = "" //todo
-  )
-  @Caption("") //todo
+  @NotEmpty()
   @Access(AccessType.FIELD)
   private Date validFrom;
 
   @Basic
-  @Caption("") //todo
   @Access(AccessType.FIELD)
   private Date validTo;
 
   @Basic
-  @NotNull(
-    message = "" //todo
-  )
-  @Caption("") //todo
+  @NotEmpty()
   @Enumerated(EnumType.STRING)
   @Access(AccessType.FIELD)
   private ContactType type;
 
-  //Address contact
   @Basic
-  @Caption(Constants.BO_ADDRESS_STREET)
   @Access(AccessType.FIELD)
   private String street;
 
   @Basic
-  @Caption(Constants.BO_ADDRESS_NUMBER)
   @Access(AccessType.FIELD)
   private String number;
 
   @Basic
-  @Caption(Constants.BO_ADDRESS_NUMBERSUFFIX)
   @Access(AccessType.FIELD)
   private String numberSuffix;
 
   @Basic
-  @Caption(Constants.BO_ADDRESS_POSTBOX)
   @Access(AccessType.FIELD)
   private String postbox;
 
   @Basic
-  @Caption(Constants.BO_ADDRESS_ZIP)
   @Access(AccessType.FIELD)
   private String zip;
 
   @Basic
-  @Caption(Constants.BO_ADDRESS_CITY)
   @Access(AccessType.FIELD)
   private String city;
 
   @Basic
-  @Caption(Constants.BO_ADDRESS_COUNTRY)
   @Access(AccessType.FIELD)
   private String country;
 
-  //Email contact
   @Basic
-  @Caption("") //todo
-  @Access(AccessType.FIELD)
-  private String email;
-
-  //Phone contact
-  @Basic
-  @Caption("") //todo
   @Access(AccessType.FIELD)
   private String countryCode;
 
   @Basic
-  @Caption("") //todo
   @Access(AccessType.FIELD)
   private String phoneNumber;
 
+  @Basic
+  @Access(AccessType.FIELD)
+  private String email;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @NotEmpty(
-    message = "" //todo
-  )
+  @NotEmpty()
   private Person person;
+
 
   public Date getValidFrom() {
     return validFrom;
   }
 
-  public void setValidFrom(Date validFrom) {
+  public void setValidFrom(final Date validFrom) {
     this.validFrom = validFrom;
   }
 
@@ -133,7 +105,7 @@ public class Contact extends AbstractBusinessObject {
     return validTo;
   }
 
-  public void setValidTo(Date validTo) {
+  public void setValidTo(final Date validTo) {
     this.validTo = validTo;
   }
 
@@ -141,7 +113,7 @@ public class Contact extends AbstractBusinessObject {
     return type;
   }
 
-  public void setType(ContactType type) {
+  public void setType(final ContactType type) {
     this.type = type;
   }
 
@@ -149,7 +121,7 @@ public class Contact extends AbstractBusinessObject {
     return street;
   }
 
-  public void setStreet(String street) {
+  public void setStreet(final String street) {
     this.street = street;
   }
 
@@ -157,7 +129,7 @@ public class Contact extends AbstractBusinessObject {
     return number;
   }
 
-  public void setNumber(String number) {
+  public void setNumber(final String number) {
     this.number = number;
   }
 
@@ -165,7 +137,7 @@ public class Contact extends AbstractBusinessObject {
     return numberSuffix;
   }
 
-  public void setNumberSuffix(String numberSuffix) {
+  public void setNumberSuffix(final String numberSuffix) {
     this.numberSuffix = numberSuffix;
   }
 
@@ -173,7 +145,7 @@ public class Contact extends AbstractBusinessObject {
     return postbox;
   }
 
-  public void setPostbox(String postbox) {
+  public void setPostbox(final String postbox) {
     this.postbox = postbox;
   }
 
@@ -181,7 +153,7 @@ public class Contact extends AbstractBusinessObject {
     return zip;
   }
 
-  public void setZip(String zip) {
+  public void setZip(final String zip) {
     this.zip = zip;
   }
 
@@ -189,7 +161,7 @@ public class Contact extends AbstractBusinessObject {
     return city;
   }
 
-  public void setCity(String city) {
+  public void setCity(final String city) {
     this.city = city;
   }
 
@@ -197,23 +169,15 @@ public class Contact extends AbstractBusinessObject {
     return country;
   }
 
-  public void setCountry(String country) {
+  public void setCountry(final String country) {
     this.country = country;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
   }
 
   public String getCountryCode() {
     return countryCode;
   }
 
-  public void setCountryCode(String countryCode) {
+  public void setCountryCode(final String countryCode) {
     this.countryCode = countryCode;
   }
 
@@ -221,15 +185,25 @@ public class Contact extends AbstractBusinessObject {
     return phoneNumber;
   }
 
-  public void setPhoneNumber(String phoneNumber) {
+  public void setPhoneNumber(final String phoneNumber) {
     this.phoneNumber = phoneNumber;
   }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(final String email) {
+    this.email = email;
+  }
+
 
   public Person getPerson() {
     return person;
   }
 
-  public void setPerson(Person person) {
+  public void setPerson(final Person person) {
     this.person = person;
   }
+
 }

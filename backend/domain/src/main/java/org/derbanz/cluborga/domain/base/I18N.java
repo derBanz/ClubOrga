@@ -1,3 +1,4 @@
+// generated
 package org.derbanz.cluborga.domain.base;
 
 import jakarta.enterprise.context.ApplicationScoped;
