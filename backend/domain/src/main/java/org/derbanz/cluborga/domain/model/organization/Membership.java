@@ -8,14 +8,13 @@ import org.derbanz.cluborga.domain.base.AbstractBusinessObject;
 import org.derbanz.cluborga.domain.enums.MembershipStatus;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity(
   name = "org.derbanz.cluborga.domain.model.organization.Membership"
 )
 @Table(
-  name = "co_membership"
+  name = "db_membership"
 )
 public class Membership extends AbstractBusinessObject {
 
@@ -43,7 +42,7 @@ public class Membership extends AbstractBusinessObject {
   private Boolean discount;
 
   @Basic
-  @NotEmpty()
+  @NotNull()
   @Enumerated(EnumType.STRING)
   @Access(AccessType.FIELD)
   private MembershipStatus status;
@@ -56,6 +55,7 @@ public class Membership extends AbstractBusinessObject {
   private Application application;
 
   @OneToMany(
+    mappedBy = "membership",
     cascade = {
       CascadeType.REMOVE
     },

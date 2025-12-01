@@ -52,7 +52,8 @@ public class BaseApplicationLogicImpl implements BaseApplicationLogic {
   }
 
   @Override
-  @Transactional  public List<ApplicationBto> getList(List<String> ids) {
+  @Transactional
+  public List<ApplicationBto> getList(List<String> ids) {
     List<UUID> idList = ids.stream().map(UUID::fromString).toList();
     CriteriaBuilder cb = entityManager.getCriteriaBuilder();
     CriteriaQuery<Application> query = cb.createQuery(Application.class);
@@ -63,7 +64,8 @@ public class BaseApplicationLogicImpl implements BaseApplicationLogic {
   }
 
   @Override
-  @Transactional  public List<ApplicationBto> getAll() {
+  @Transactional
+  public List<ApplicationBto> getAll() {
     CriteriaBuilder cb = entityManager.getCriteriaBuilder();
     CriteriaQuery<Application> query = cb.createQuery(Application.class);
     Root<Application> root = query.from(Application.class);

@@ -52,7 +52,8 @@ public class BasePaymentMethodLogicImpl implements BasePaymentMethodLogic {
   }
 
   @Override
-  @Transactional  public List<PaymentMethodBto> getList(List<String> ids) {
+  @Transactional
+  public List<PaymentMethodBto> getList(List<String> ids) {
     List<UUID> idList = ids.stream().map(UUID::fromString).toList();
     CriteriaBuilder cb = entityManager.getCriteriaBuilder();
     CriteriaQuery<PaymentMethod> query = cb.createQuery(PaymentMethod.class);
@@ -63,7 +64,8 @@ public class BasePaymentMethodLogicImpl implements BasePaymentMethodLogic {
   }
 
   @Override
-  @Transactional  public List<PaymentMethodBto> getAll() {
+  @Transactional
+  public List<PaymentMethodBto> getAll() {
     CriteriaBuilder cb = entityManager.getCriteriaBuilder();
     CriteriaQuery<PaymentMethod> query = cb.createQuery(PaymentMethod.class);
     Root<PaymentMethod> root = query.from(PaymentMethod.class);

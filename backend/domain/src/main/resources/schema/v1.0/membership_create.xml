@@ -8,11 +8,11 @@
     <changeSet id="membership-0-0" author="sebanzian">
         <preConditions onFail="MARK_RAN">
             <not>
-            <tableExists tableName="co_membership"/>
+            <tableExists tableName="db_membership"/>
             </not>
         </preConditions>
 
-        <createTable tableName="co_membership">
+        <createTable tableName="db_membership">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
@@ -37,9 +37,25 @@
             <column name="person_id" type="UUID">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
+            <column name="application_id" type="UUID"/>
         </createTable>
-        <addForeignKeyConstraint baseColumnNames="person_id" baseTableName="co_membership"
+    </changeSet>
+    <changeSet id="membership-0-1" author="sebanzian">
+        <preConditions onFail="CONTINUE">
+          <tableExists tableName="db_person"/>
+        </preConditions>
+
+        <addForeignKeyConstraint baseColumnNames="person_id" baseTableName="db_membership"
                                  constraintName="fk_person" referencedColumnNames="id"
-                                 referencedTableName="co_person"/>
+                                 referencedTableName="db_person"/>
+    </changeSet>
+    <changeSet id="membership-0-2" author="sebanzian">
+        <preConditions onFail="CONTINUE">
+          <tableExists tableName="db_application"/>
+        </preConditions>
+
+        <addForeignKeyConstraint baseColumnNames="application_id" baseTableName="db_membership"
+                                 constraintName="fk_application" referencedColumnNames="id"
+                                 referencedTableName="db_application"/>
     </changeSet>
 </databaseChangeLog>

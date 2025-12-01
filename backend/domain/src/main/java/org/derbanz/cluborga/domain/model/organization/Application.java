@@ -13,7 +13,7 @@ import java.util.Date;
   name = "org.derbanz.cluborga.domain.model.organization.Application"
 )
 @Table(
-  name = "co_application"
+  name = "db_application"
 )
 public class Application extends AbstractBusinessObject {
 
@@ -33,7 +33,7 @@ public class Application extends AbstractBusinessObject {
   private Date dateOfReply;
 
   @Basic
-  @NotEmpty()
+  @NotNull()
   @Enumerated(EnumType.STRING)
   @Access(AccessType.FIELD)
   private ApplicationStatus status;
@@ -74,5 +74,4 @@ public class Application extends AbstractBusinessObject {
   public void setMembership(final Membership membership) {
     this.membership = membership;
   }
-
 }

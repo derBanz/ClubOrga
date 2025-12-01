@@ -8,11 +8,11 @@
     <changeSet id="application-0-0" author="sebanzian">
         <preConditions onFail="MARK_RAN">
             <not>
-            <tableExists tableName="co_application"/>
+            <tableExists tableName="db_application"/>
             </not>
         </preConditions>
 
-        <createTable tableName="co_application">
+        <createTable tableName="db_application">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
@@ -33,8 +33,14 @@
             </column>
             <column name="membership_id" type="UUID"/>
         </createTable>
-        <addForeignKeyConstraint baseColumnNames="membership_id" baseTableName="co_application"
+    </changeSet>
+    <changeSet id="application-0-1" author="sebanzian">
+        <preConditions onFail="CONTINUE">
+          <tableExists tableName="db_membership"/>
+        </preConditions>
+
+        <addForeignKeyConstraint baseColumnNames="membership_id" baseTableName="db_application"
                                  constraintName="fk_membership" referencedColumnNames="id"
-                                 referencedTableName="co_membership"/>
+                                 referencedTableName="db_membership"/>
     </changeSet>
 </databaseChangeLog>

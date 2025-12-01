@@ -3,7 +3,6 @@ package org.derbanz.cluborga.domain.model.organization;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import org.derbanz.cluborga.domain.base.AbstractBusinessObject;
 
 import java.util.Date;
@@ -12,7 +11,7 @@ import java.util.Date;
   name = "org.derbanz.cluborga.domain.model.organization.PaymentMethod"
 )
 @Table(
-  name = "co_paymentmethod"
+  name = "db_paymentmethod"
 )
 public class PaymentMethod extends AbstractBusinessObject {
 
@@ -113,5 +112,4 @@ public class PaymentMethod extends AbstractBusinessObject {
   public void setMembership(final Membership membership) {
     this.membership = membership;
   }
-
 }

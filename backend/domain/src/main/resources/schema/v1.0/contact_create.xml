@@ -8,11 +8,11 @@
     <changeSet id="contact-0-0" author="sebanzian">
         <preConditions onFail="MARK_RAN">
             <not>
-            <tableExists tableName="co_contact"/>
+            <tableExists tableName="db_contact"/>
             </not>
         </preConditions>
 
-        <createTable tableName="co_contact">
+        <createTable tableName="db_contact">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
@@ -45,8 +45,14 @@
                 <constraints nullable="false" primaryKey="false"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseColumnNames="person_id" baseTableName="co_contact"
+    </changeSet>
+    <changeSet id="contact-0-1" author="sebanzian">
+        <preConditions onFail="CONTINUE">
+          <tableExists tableName="db_person"/>
+        </preConditions>
+
+        <addForeignKeyConstraint baseColumnNames="person_id" baseTableName="db_contact"
                                  constraintName="fk_person" referencedColumnNames="id"
-                                 referencedTableName="co_person"/>
+                                 referencedTableName="db_person"/>
     </changeSet>
 </databaseChangeLog>

@@ -13,7 +13,7 @@ import java.util.Date;
   name = "org.derbanz.cluborga.domain.model.organization.Contact"
 )
 @Table(
-  name = "co_contact"
+  name = "db_contact"
 )
 public class Contact extends AbstractBusinessObject {
 
@@ -43,7 +43,7 @@ public class Contact extends AbstractBusinessObject {
   private Date validTo;
 
   @Basic
-  @NotEmpty()
+  @NotNull()
   @Enumerated(EnumType.STRING)
   @Access(AccessType.FIELD)
   private ContactType type;
@@ -205,5 +205,4 @@ public class Contact extends AbstractBusinessObject {
   public void setPerson(final Person person) {
     this.person = person;
   }
-
 }

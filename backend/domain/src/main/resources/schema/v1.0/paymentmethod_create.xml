@@ -8,11 +8,11 @@
     <changeSet id="paymentmethod-0-0" author="sebanzian">
         <preConditions onFail="MARK_RAN">
             <not>
-            <tableExists tableName="co_paymentmethod"/>
+            <tableExists tableName="db_paymentmethod"/>
             </not>
         </preConditions>
 
-        <createTable tableName="co_paymentmethod">
+        <createTable tableName="db_paymentmethod">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
@@ -40,8 +40,14 @@
                 <constraints nullable="false" primaryKey="false"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseColumnNames="membership_id" baseTableName="co_paymentmethod"
+    </changeSet>
+    <changeSet id="paymentmethod-0-1" author="sebanzian">
+        <preConditions onFail="CONTINUE">
+          <tableExists tableName="db_membership"/>
+        </preConditions>
+
+        <addForeignKeyConstraint baseColumnNames="membership_id" baseTableName="db_paymentmethod"
                                  constraintName="fk_membership" referencedColumnNames="id"
-                                 referencedTableName="co_membership"/>
+                                 referencedTableName="db_membership"/>
     </changeSet>
 </databaseChangeLog>

@@ -61,7 +61,8 @@ public class BasePersonLogicImpl implements BasePersonLogic {
   }
 
   @Override
-  @Transactional  public List<PersonBto> getList(List<String> ids) {
+  @Transactional
+  public List<PersonBto> getList(List<String> ids) {
     List<UUID> idList = ids.stream().map(UUID::fromString).toList();
     CriteriaBuilder cb = entityManager.getCriteriaBuilder();
     CriteriaQuery<Person> query = cb.createQuery(Person.class);
@@ -72,7 +73,8 @@ public class BasePersonLogicImpl implements BasePersonLogic {
   }
 
   @Override
-  @Transactional  public List<PersonBto> getAll() {
+  @Transactional
+  public List<PersonBto> getAll() {
     CriteriaBuilder cb = entityManager.getCriteriaBuilder();
     CriteriaQuery<Person> query = cb.createQuery(Person.class);
     Root<Person> root = query.from(Person.class);

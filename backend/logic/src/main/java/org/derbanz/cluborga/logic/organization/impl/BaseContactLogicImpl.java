@@ -52,7 +52,8 @@ public class BaseContactLogicImpl implements BaseContactLogic {
   }
 
   @Override
-  @Transactional  public List<ContactBto> getList(List<String> ids) {
+  @Transactional
+  public List<ContactBto> getList(List<String> ids) {
     List<UUID> idList = ids.stream().map(UUID::fromString).toList();
     CriteriaBuilder cb = entityManager.getCriteriaBuilder();
     CriteriaQuery<Contact> query = cb.createQuery(Contact.class);
@@ -63,7 +64,8 @@ public class BaseContactLogicImpl implements BaseContactLogic {
   }
 
   @Override
-  @Transactional  public List<ContactBto> getAll() {
+  @Transactional
+  public List<ContactBto> getAll() {
     CriteriaBuilder cb = entityManager.getCriteriaBuilder();
     CriteriaQuery<Contact> query = cb.createQuery(Contact.class);
     Root<Contact> root = query.from(Contact.class);

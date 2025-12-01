@@ -61,7 +61,8 @@ public class BaseMembershipLogicImpl implements BaseMembershipLogic {
   }
 
   @Override
-  @Transactional  public List<MembershipBto> getList(List<String> ids) {
+  @Transactional
+  public List<MembershipBto> getList(List<String> ids) {
     List<UUID> idList = ids.stream().map(UUID::fromString).toList();
     CriteriaBuilder cb = entityManager.getCriteriaBuilder();
     CriteriaQuery<Membership> query = cb.createQuery(Membership.class);
@@ -72,7 +73,8 @@ public class BaseMembershipLogicImpl implements BaseMembershipLogic {
   }
 
   @Override
-  @Transactional  public List<MembershipBto> getAll() {
+  @Transactional
+  public List<MembershipBto> getAll() {
     CriteriaBuilder cb = entityManager.getCriteriaBuilder();
     CriteriaQuery<Membership> query = cb.createQuery(Membership.class);
     Root<Membership> root = query.from(Membership.class);

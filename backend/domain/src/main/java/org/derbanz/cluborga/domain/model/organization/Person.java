@@ -8,14 +8,13 @@ import org.derbanz.cluborga.domain.base.AbstractBusinessObject;
 import org.derbanz.cluborga.domain.enums.Gender;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity(
   name = "org.derbanz.cluborga.domain.model.organization.Person"
 )
 @Table(
-  name = "co_person"
+  name = "db_person"
 )
 public class Person extends AbstractBusinessObject {
 
@@ -41,12 +40,13 @@ public class Person extends AbstractBusinessObject {
   private Date dateOfBirth;
 
   @Basic
-  @NotEmpty()
+  @NotNull()
   @Enumerated(EnumType.STRING)
   @Access(AccessType.FIELD)
   private Gender gender;
 
   @OneToMany(
+    mappedBy = "person",
     cascade = {
       CascadeType.REMOVE
     },
@@ -56,6 +56,7 @@ public class Person extends AbstractBusinessObject {
   private Set<Membership> memberships;
 
   @OneToMany(
+    mappedBy = "person",
     cascade = {
       CascadeType.REMOVE
     },
@@ -116,6 +117,7 @@ public class Person extends AbstractBusinessObject {
     }
     return false;
   }
+
   public Set<Contact> getContacts() {
     return contacts;
   }
